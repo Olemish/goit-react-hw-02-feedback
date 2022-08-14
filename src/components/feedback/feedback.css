@@ -1,0 +1,22 @@
+.feedback__box {
+  display: block;
+  padding: 10px;
+  margin: 0;
+  justify-content: space-between;
+}
+.feedback__text {
+  font-size: large;
+  text-align: center;
+}
+.feebdack__listScales {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  gap: 20px;
+  list-style: none;
+}
+.feebdack__scale {
+  font-size: large;
+  border: 1px solid black;
+}
