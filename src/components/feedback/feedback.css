@@ -17,6 +17,17 @@
   list-style: none;
 }
 .feebdack__scale {
+  display: block;
+  font-size: x-large;
+}
+.feedback__statisticsText {
   font-size: large;
-  border: 1px solid black;
+  text-align: center;
+}
+.statistics__listResults {
+  display: block;
+  justify-content: center;
+}
+.statistics__result {
+  font-size: large;
 }
