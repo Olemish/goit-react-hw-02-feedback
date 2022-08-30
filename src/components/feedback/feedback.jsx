@@ -9,7 +9,6 @@ const options = {
   neutral: 'neutral',
   bad: 'bad',
 };
-let visible = false;
 
 class Feedback extends React.Component {
   state = {
@@ -22,10 +21,7 @@ class Feedback extends React.Component {
     this.setState(prevState => ({ visible: !prevState.visible }));
   };
 
-  onLeaveFeedback = e => {
-    const key = e.target.dataset.label;
-    console.log(key);
-    visible = true;
+  onLeaveFeedback = key => {
     this.setState(prevState => {
       return {
         [key]: prevState[key] + 1,
@@ -49,18 +45,20 @@ class Feedback extends React.Component {
           <FeedbackOptions
             options={options}
             show={this.toogle}
-            onLeaveFeedback={this.onLeaveFeedback}
+            onLeaveFeedback={e => this.onLeaveFeedback(e.target.dataset.label)}
           />
         </Section>
         <Section title={`Statistics`}>
-          {!visible && <Message text="There is no feedback" />}
+          {this.countTotalFeedback() < 1 && (
+            <Message text="There is no feedback" />
+          )}
           <Statistics
-            visible={visible}
+            visible={this.countTotalFeedback()}
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
-            Total={this.countTotalFeedback()}
-            PositivePercentage={this.countPositiveFeedbackPercentage()}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
           />
         </Section>
       </div>
