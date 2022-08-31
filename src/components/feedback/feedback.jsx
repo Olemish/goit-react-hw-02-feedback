@@ -4,12 +4,7 @@ import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
 import Section from './section';
 import Message from './message';
-const options = {
-  good: 'good',
-  neutral: 'neutral',
-  bad: 'bad',
-};
-let visible = false;
+const options = ['good', 'neutral', 'bad'];
 
 class Feedback extends React.Component {
   state = {
@@ -18,17 +13,10 @@ class Feedback extends React.Component {
     bad: 0,
   };
 
-  toogle = () => {
-    this.setState(prevState => ({ visible: !prevState.visible }));
-  };
-
-  onLeaveFeedback = e => {
-    const key = e.target.dataset.label;
-    console.log(key);
-    visible = true;
+  onLeaveFeedback = option => {
     this.setState(prevState => {
       return {
-        [key]: prevState[key] + 1,
+        [option]: prevState[option] + 1,
       };
     });
   };
@@ -45,22 +33,23 @@ class Feedback extends React.Component {
   render() {
     return (
       <div className="feedback__box">
-        <Section title={`Please leave feedback`}>
+        <Section title="Please leave feedback">
           <FeedbackOptions
             options={options}
-            show={this.toogle}
-            onLeaveFeedback={this.onLeaveFeedback}
+            onLeaveFeedback={option => this.onLeaveFeedback(option)}
           />
         </Section>
-        <Section title={`Statistics`}>
-          {!visible && <Message text="There is no feedback" />}
+        <Section title="Statistics">
+          {this.countTotalFeedback() < 1 && (
+            <Message text="There is no feedback" />
+          )}
           <Statistics
-            visible={visible}
+            visible={this.countTotalFeedback()}
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
-            Total={this.countTotalFeedback()}
-            PositivePercentage={this.countPositiveFeedbackPercentage()}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
           />
         </Section>
       </div>

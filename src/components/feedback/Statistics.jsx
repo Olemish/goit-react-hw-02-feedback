@@ -6,10 +6,10 @@ const Statistics = ({
   good,
   neutral,
   bad,
-  Total,
-  PositivePercentage,
+  total,
+  positivePercentage,
 }) =>
-  visible && (
+  visible > 0 && (
     <div className="feedback__statistics">
       <div className="statistics__listResults">
         <p className="statistics__result">
@@ -22,10 +22,10 @@ const Statistics = ({
           Bad:<span>{bad}</span>
         </p>
         <p className="statistics__result">
-          Total:<span>{Total}</span>
+          total:<span>{total}</span>
         </p>
         <p className="statistics__result">
-          Positive feedback: <span>{PositivePercentage}</span>%
+          positive feedback: <span>{positivePercentage}</span>%
         </p>
       </div>
     </div>
