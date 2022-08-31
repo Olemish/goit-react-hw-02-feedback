@@ -27,6 +27,7 @@ const Statistics = ({
         <p className="statistics__result">
           positive feedback: <span>{positivePercentage}</span>%
         </p>
+        <p className="statistics__result"></p>
       </div>
     </div>
   );
